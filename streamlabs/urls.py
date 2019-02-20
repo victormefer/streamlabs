@@ -18,5 +18,6 @@ from django.contrib import admin
 
 urlpatterns = [
     path('', include('login.urls'), name='login'),
+    path('events/', include('events.urls'), name='events'),
     path('admin/', admin.site.urls),
 ]
