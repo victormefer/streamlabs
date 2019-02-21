@@ -2,8 +2,6 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.conf import settings
 
-import requests
-
 
 def login(request):
     token = request.GET.get('code')
