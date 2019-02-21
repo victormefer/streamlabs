@@ -2,4 +2,5 @@ from django.shortcuts import render
 
 
 def events(request):
-    return render(request, 'events/events.html')
+    context = {'streamer': request.POST.get('favorite')}
+    return render(request, 'events/events.html', context=context)
