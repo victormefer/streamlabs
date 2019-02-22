@@ -3,6 +3,9 @@ from django.conf import settings
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
+from asgiref.sync import async_to_sync
+import channels.layers
+
 import requests
 
 from .utils import Utils
@@ -38,7 +41,23 @@ def get_followers(request):
                 print('Event subscription denied!')
                 return HttpResponse()
     else:
-        print("HELLLOU!!!!!")
-        # print(request.body)
+        print(request.POST.get('data'))
+        # data = request.POST.get('data')
         # import pdb;pdb.set_trace()
-        return HttpResponse()
+        # user = data[0]['to_name']
+        # follower = data[0]['from_name']
+        # message = 'User {} has started following {}'.format(follower, user)
+
+        # try:
+        #     channel_layer = channels.layers.get_channel_layer()
+        #     async_to_sync(channel_layer.group_send)(
+        #         'event-consumer',
+        #         {
+        #             'type': 'send_message',
+        #             'text': message
+        #         }
+        #     )
+        # except ConnectionRefusedError:
+        #     print('ERROR on sending message via websocket')
+
+        return HttpResponse() # tell twitch server the event was received

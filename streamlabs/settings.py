@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'login',
     'events',
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -123,3 +124,24 @@ STATIC_URL = '/static/'
 
 TWITCH_CLIENT_ID = 'luyjbfgea8jcw4dgnpbgr7ueirv947'
 TWITCH_CLIENT_SECRET = 'orkxk1wsu1wr27zks36tx194dyu6ag'
+
+# CHANNEL_LAYERS = {
+#     'default': {
+#         'BACKEND': 'channels_redis.core.RedisChannelLayer',
+#         'CONFIG': {
+#             'hosts': [os.environ.get('REDIS_URL', 'redis://localhost:6379')],
+#         },
+#         'ROUTING': 'streamlabs.routing.channel_routing',
+#     },
+# }
+
+ASGI_APPLICATION = 'streamlabs.routing.application'
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("localhost", 6379)],
+        },
+    },
+}
