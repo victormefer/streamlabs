@@ -1,6 +1,11 @@
 from django.shortcuts import render
+from django.conf import settings
+from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 
 import requests
+
+from .utils import Utils
 
 
 def events(request):
@@ -8,27 +13,32 @@ def events(request):
     token = request.POST.get('token')
 
     # get streamer user info
-    params = {'login': streamer}
-    headers = {'Authorization': 'Bearer %s' % token}
-    user_req = requests.get('https://api.twitch.tv/helix/users', params=params,
-                            headers=headers)
-    user = user_req.json()['data'][0]
-
-    data = {
-        'callback': '',
-        'mode': 'subscribe',
-        'lease_seconds': '864000',
-        'topic': 'https://api.twitch.tv/helix/users/follows?first=1&to_id={}'
-                 .format(user['id'])
-    }
-    req = requests.post('https://api.twitch.tv/helix/webhooks/hub', data=data)
+    user = Utils.get_user_data(streamer, token)
+    # subscribe to user follower events
+    Utils.subscribe_user_followers(user['id'], token)
 
     context = {'streamer': streamer}
     return render(request, 'events/events.html', context=context)
 
 
-# def verify_subscription
-
-
-# def get_user_follows(request):
-#     request.
+@csrf_exempt
+def get_followers(request):
+    if request.method == 'GET':
+        mode = request.GET.get('hub.mode')
+        if mode:
+            if mode == 'subscribe':
+                challenge = request.GET.get('hub.challenge')
+                print('FUNFOU!!!')
+                return HttpResponse(content=challenge)
+            elif mode == 'unsubscribe':
+                challenge = request.GET.get('hub.challenge')
+                print('Unsubscribed from event')
+                return HttpResponse(content=challenge)
+            elif mode == 'denial':
+                print('Event subscription denied!')
+                return HttpResponse()
+    else:
+        print("HELLLOU!!!!!")
+        # print(request.body)
+        # import pdb;pdb.set_trace()
+        return HttpResponse()

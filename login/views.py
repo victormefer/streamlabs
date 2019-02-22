@@ -15,8 +15,8 @@ def login(request):
             'code': code,
             'grant_type': 'authorization_code',
         }
-        token_request = requests.post('https://id.twitch.tv/oauth2/token', data=data)
-        response = token_request.json()
+        token_resp = requests.post('https://id.twitch.tv/oauth2/token', data=data)
+        response = token_resp.json()
 
         return render(request, 'login/login.html', context=response)
     # import pdb;pdb.set_trace()

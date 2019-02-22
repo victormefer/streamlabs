@@ -25,7 +25,7 @@ SECRET_KEY = 'i2o%f2y0@s)r51_-^1+19)s!1sgn80crl14d!wmlabxv52g(#r'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
