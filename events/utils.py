@@ -29,8 +29,7 @@ class Utils():
                              data=data,
                              headers=headers)
         if resp.status_code != 202:
-            import pdb;pdb.set_trace()
-            print('Error on subscription request')
+            print('===== ERROR on subscription request! ====')
 
     @staticmethod
     def unsubscribe_user_followers(user_id, token):
@@ -47,4 +46,4 @@ class Utils():
                              data=data,
                              headers=headers)
         if resp.status_code != 202:
-            print('Error on subscription request')
+            print('==== ERROR on unsubscription request! ====')
