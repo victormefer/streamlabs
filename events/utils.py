@@ -1,4 +1,5 @@
 import requests
+from django.conf import settings
 
 
 class Utils():
@@ -17,8 +18,8 @@ class Utils():
     def subscribe_user_followers(user_id, token):
         headers = {'Authorization': 'Bearer %s' % token}
         data = {
-            'hub.callback': 'http://4e412737.ngrok.io/'
-                            'events/subs/user/followers',
+            'hub.callback': settings.BASE_URL +
+                            '/events/subs/user/followers',
             'hub.mode': 'subscribe',
             'hub.lease_seconds': '864000',
             'hub.topic':
@@ -35,8 +36,8 @@ class Utils():
     def unsubscribe_user_followers(user_id, token):
         headers = {'Authorization': 'Bearer %s' % token}
         data = {
-            'hub.callback': 'http://4e412737.ngrok.io/'
-                            'events/subs/user/followers',
+            'hub.callback': settings.BASE_URL +
+                            '/events/subs/user/followers',
             'hub.mode': 'unsubscribe',
             'hub.topic':
                 'https://api.twitch.tv/helix/users/follows?first=1&to_id={}'

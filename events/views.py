@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
 import requests
+import json
 
 from .utils import Utils
 
@@ -39,6 +40,6 @@ def get_followers(request):
                 return HttpResponse()
     else:
         print("===== Event received =====")
-        print(request.POST.get('data'))
+        print(json.loads(request.body))
         # import pdb;pdb.set_trace()
         return HttpResponse()

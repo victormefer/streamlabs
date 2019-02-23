@@ -11,7 +11,7 @@ def login(request):
         data = {
             'client_id': settings.TWITCH_CLIENT_ID,
             'client_secret': settings.TWITCH_CLIENT_SECRET,
-            'redirect_uri': 'http://localhost:8000',
+            'redirect_uri': settings.BASE_URL,
             'code': code,
             'grant_type': 'authorization_code',
         }
@@ -27,7 +27,7 @@ def login(request):
     else:
         params = {
             'client_id': settings.TWITCH_CLIENT_ID,
-            'redirect_uri': 'http://localhost:8000',
+            'redirect_uri': settings.BASE_URL,
             'scope': 'channel:read:subscriptions'
         }
         return HttpResponseRedirect(
