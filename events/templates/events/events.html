@@ -11,12 +11,13 @@
             <div class="col-12">
                 <div id="twitch-embed"></div>
             </div>
-            <div class="col-12">
-                <div id="events"></div>
+            <div class="col-12 mt-2"><h4>Recent events</h4></div>
+            <div class="col-12 mt-1" id="events">
             </div>
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/reconnecting-websocket@4.1.10/dist/reconnecting-websocket-cjs.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://embed.twitch.tv/embed/v1.js"></script>
 
@@ -28,11 +29,17 @@
             channel: "{{ streamer }}"
         });
 
-        var socket = new ReconnectingWebSocket('ws://' + window.location.host + 'eventsocket/');
+        var socket = new ReconnectingWebSocket('ws://' + window.location.host + '/eventsocket/');
+
+        var nMessages = 0
 
         socket.onmessage = function(message) {
-            var data = JSON.parse(message.data);
-            $('#event').append('<span>' + data + '</span');
+            if (nMessages == 10) {
+                $('#events .alert:last').remove()
+            } else {
+                nMessages++;
+            }
+            $('#events').prepend('<div class="alert alert-primary" role="alert">' + message.data + '</div>');
         }
 
     </script>

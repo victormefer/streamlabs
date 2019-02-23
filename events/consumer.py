@@ -3,7 +3,7 @@ import json
 
 
 class EventConsumer(AsyncWebsocketConsumer):
-    async def websocket_connect(self):
+    async def connect(self):
         self.group_name = 'event-consumer'
         await self.channel_layer.group_add(
             self.group_name,
@@ -14,7 +14,7 @@ class EventConsumer(AsyncWebsocketConsumer):
     async def disconnect(self, close_code):
         pass
 
-    async def websocket_receive(self, text_data):
+    async def receive(self, text_data):
         text_data_json = json.loads(text_data)
         message = text_data_json['message']
 

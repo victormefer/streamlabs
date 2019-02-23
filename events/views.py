@@ -43,10 +43,10 @@ def get_followers(request):
                 return HttpResponse()
     else:
         print("===== Event received =====")
-        print(json.loads(request.body))
-        data = json.loads(request.body))
-        user = data[0]['to_name']
-        follower = data[0]['from_name']
+        data = json.loads(request.body)
+        print(data)
+        user = data['data'][0]['to_name']
+        follower = data['data'][0]['from_name']
         message = 'User {} has started following {}'.format(follower, user)
 
         try:
@@ -58,7 +58,8 @@ def get_followers(request):
                     'text': message
                 }
             )
-        except ConnectionRefusedError:
-            print('ERROR on sending message via websocket')
+        except ConnectionRefusedError as ex:
+            print('===== ERROR on sending message via websocket =====')
+            print(ex)
 
         return HttpResponse() # tell twitch server the event was received
