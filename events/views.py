@@ -28,17 +28,17 @@ def get_followers(request):
         if mode:
             if mode == 'subscribe':
                 challenge = request.GET.get('hub.challenge')
-                print('FUNFOU!!!')
+                print('===== Subscription successful!')
                 return HttpResponse(content=challenge)
             elif mode == 'unsubscribe':
                 challenge = request.GET.get('hub.challenge')
-                print('Unsubscribed from event')
+                print('===== Unsubscribed from event')
                 return HttpResponse(content=challenge)
             elif mode == 'denial':
-                print('Event subscription denied!')
+                print('===== ERROR - Event subscription denied! ====')
                 return HttpResponse()
     else:
-        print("HELLLOU!!!!!")
-        # print(request.body)
+        print("===== Event received =====")
+        print(request.POST.get('data'))
         # import pdb;pdb.set_trace()
         return HttpResponse()
