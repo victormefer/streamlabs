@@ -130,6 +130,7 @@ BASE_URL = 'https://twitch-favorite-streamer.herokuapp.com'
 #     'default': {
 #         'BACKEND': 'channels_redis.core.RedisChannelLayer',
 #         'CONFIG': {
+#             'hosts': [os.environ.get('REDIS_URL', 'redis://localhost:6379')],
 #         },
 #         'ROUTING': 'streamlabs.routing.channel_routing',
 #     },
@@ -141,8 +142,7 @@ CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            'hosts': [os.environ.get('REDIS_URL', 'redis://localhost:6379')],
-            # "hosts": [(BASE_URL, 6379)],
+            "hosts": [("localhost", 6379)],
         },
     },
 }
