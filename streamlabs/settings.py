@@ -125,7 +125,7 @@ STATIC_URL = '/static/'
 TWITCH_CLIENT_ID = 'luyjbfgea8jcw4dgnpbgr7ueirv947'
 TWITCH_CLIENT_SECRET = 'orkxk1wsu1wr27zks36tx194dyu6ag'
 
-BASE_URL = 'http://4e412737.ngrok.io'
+BASE_URL = 'https://immense-earth-40169.herokuapp.com/'
 # CHANNEL_LAYERS = {
 #     'default': {
 #         'BACKEND': 'channels_redis.core.RedisChannelLayer',
