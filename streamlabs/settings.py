@@ -125,7 +125,7 @@ STATIC_URL = '/static/'
 TWITCH_CLIENT_ID = 'vshcfynsn8nmvlxe3re73w24eh3yj1'
 TWITCH_CLIENT_SECRET = '549lptg4vorclhfvtbudlw43kd49rb'
 
-BASE_URL = 'https://twitch-favorite-streamer.herokuapp.com/'
+BASE_URL = 'https://twitch-favorite-streamer.herokuapp.com'
 # CHANNEL_LAYERS = {
 #     'default': {
 #         'BACKEND': 'channels_redis.core.RedisChannelLayer',
