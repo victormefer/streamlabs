@@ -29,7 +29,8 @@
             channel: "{{ streamer }}"
         });
 
-        var socket = new ReconnectingWebSocket('ws://' + window.location.host + '/eventsocket/');
+        var wsScheme = window.location.protocol == 'https:' ? 'wss://' : 'ws://'
+        var socket = new ReconnectingWebSocket(wsScheme + window.location.host + '/eventsocket/');
 
         var nMessages = 0
 
