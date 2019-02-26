@@ -122,10 +122,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-TWITCH_CLIENT_ID = 'luyjbfgea8jcw4dgnpbgr7ueirv947'
-TWITCH_CLIENT_SECRET = 'orkxk1wsu1wr27zks36tx194dyu6ag'
+TWITCH_CLIENT_ID = 'vshcfynsn8nmvlxe3re73w24eh3yj1'
+TWITCH_CLIENT_SECRET = '549lptg4vorclhfvtbudlw43kd49rb'
 
-BASE_URL = 'http://4e412737.ngrok.io'
+BASE_URL = 'https://twitch-favorite-streamer.herokuapp.com'
 # CHANNEL_LAYERS = {
 #     'default': {
 #         'BACKEND': 'channels_redis.core.RedisChannelLayer',
@@ -142,7 +142,8 @@ CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [("localhost", 6379)],
+            'hosts': [os.environ.get('REDIS_URL', 'redis://localhost:6379')],
+            # "hosts": [(BASE_URL, 6379)],
         },
     },
 }
