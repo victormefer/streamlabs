@@ -48,3 +48,75 @@ class Utils():
                              headers=headers)
         if resp.status_code != 202:
             print('==== ERROR on unsubscription request! ====')
+
+    @staticmethod
+    def subscribe_user_following(user_id, token):
+        headers = {'Authorization': 'Bearer %s' % token}
+        data = {
+            'hub.callback': settings.BASE_URL +
+                            '/events/subs/user/following',
+            'hub.mode': 'subscribe',
+            'hub.lease_seconds': '864000',
+            'hub.topic':
+                'https://api.twitch.tv/helix/users/follows?first=1&from_id={}'
+                .format(user_id),
+        }
+        resp = requests.post('https://api.twitch.tv/helix/webhooks/hub',
+                             data=data,
+                             headers=headers)
+        if resp.status_code != 202:
+            print('===== ERROR on subscription request! ====')
+
+    @staticmethod
+    def unsubscribe_user_following(user_id, token):
+        headers = {'Authorization': 'Bearer %s' % token}
+        data = {
+            'hub.callback': settings.BASE_URL +
+                            '/events/subs/user/following',
+            'hub.mode': 'unsubscribe',
+            'hub.lease_seconds': '864000',
+            'hub.topic':
+                'https://api.twitch.tv/helix/users/follows?first=1&from_id={}'
+                .format(user_id),
+        }
+        resp = requests.post('https://api.twitch.tv/helix/webhooks/hub',
+                             data=data,
+                             headers=headers)
+        if resp.status_code != 202:
+            print('===== ERROR on unsubscription request! ====')
+
+    @staticmethod
+    def subscribe_stream_changed(user_id, token):
+        headers = {'Authorization': 'Bearer %s' % token}
+        data = {
+            'hub.callback': settings.BASE_URL +
+                            '/events/subs/stream',
+            'hub.mode': 'subscribe',
+            'hub.lease_seconds': '864000',
+            'hub.topic':
+                'https://api.twitch.tv/helix/streams?user_id={}'
+                .format(user_id),
+        }
+        resp = requests.post('https://api.twitch.tv/helix/webhooks/hub',
+                             data=data,
+                             headers=headers)
+        if resp.status_code != 202:
+            print('===== ERROR on subscription request! ====')
+
+    @staticmethod
+    def unsubscribe_stream_changed(user_id, token):
+        headers = {'Authorization': 'Bearer %s' % token}
+        data = {
+            'hub.callback': settings.BASE_URL +
+                            '/events/subs/stream',
+            'hub.mode': 'unsubscribe',
+            'hub.lease_seconds': '864000',
+            'hub.topic':
+                'https://api.twitch.tv/helix/streams?user_id={}'
+                .format(user_id),
+        }
+        resp = requests.post('https://api.twitch.tv/helix/webhooks/hub',
+                             data=data,
+                             headers=headers)
+        if resp.status_code != 202:
+            print('===== ERROR on unsubscription request! ====')
